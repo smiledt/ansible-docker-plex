@@ -1,0 +1,8 @@
+---
+# handlers file for plex_docker
+
+- name: Restart Plex
+  docker_container:
+    name: "{{ plex_name }}"
+    state: started
+    restart: true

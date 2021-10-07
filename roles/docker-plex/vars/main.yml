@@ -1,0 +1,23 @@
+---
+# vars file for plex_docker
+
+plex_name: plex
+plex_image: linuxserver/plex
+plex_network_mode: host
+plex_ports:
+  - 32400:32400
+plex_config_directory: /opt/plex
+plex_movie_directory: /mnt/media/movies
+plex_tv_directory: /mnt/media/tv                                                                       
+plex_environment_variables:
+  PUID: "{{ media_uid }}"
+  PGID: "{{ media_gid }}"
+  TZ: America/Chicago
+
+plex_docker_additional_options:
+  restart_policy: unless-stopped
+
+media_user: mediasvc
+media_uid: "1099"
+media_group: media
+media_gid: "1099"

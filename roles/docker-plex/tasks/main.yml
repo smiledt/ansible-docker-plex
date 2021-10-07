@@ -1,0 +1,37 @@
+---
+# tasks file for docker-plex
+
+- name: Create Plex directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ media_user }}"
+    group: "{{ media_group }}"
+    mode: 0777
+  loop:
+    - "{{ plex_config_directory }}"
+    - "{{ plex_tv_directory }}"
+    - "{{ plex_movie_directory }}"
+
+- name: Set Docker container parameters
+  set_fact:
+    plex_container_parameters:
+      name: "{{ plex_name }}"
+      image: "{{ plex_image }}"
+      state: started
+      network_mode: "{{ plex_network_mode }}"
+      published_ports: "{{ plex_ports }}"
+      volumes:
+        - "{{ plex_config_directory }}:/config"
+        - "{{ plex_movie_directory }}:/movies"
+        - "{{ plex_tv_directory }}:/tv"
+      env: "{{ plex_environment_variables }}"
+
+- name: Create plex container
+  docker_container: "{{ plex_container_parameters | combine(plex_docker_additional_options) }}"
+  register: plex_container
+
+- name: Wait for plex start
+  wait_for:
+    port: "{{ plex_ports[0].split(':')[0] }}"
+    host: "{{ plex_container.container.NetworkSettings.IPAddress }}"
