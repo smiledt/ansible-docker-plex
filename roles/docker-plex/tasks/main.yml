@@ -20,7 +20,7 @@
       image: "{{ plex_image }}"
       state: started
       network_mode: "{{ plex_network_mode }}"
-      published_ports: "{{ plex_ports }}"
+#      published_ports: "{{ plex_ports }}"
       volumes:
         - "{{ plex_config_directory }}:/config"
         - "{{ plex_movie_directory }}:/movies"

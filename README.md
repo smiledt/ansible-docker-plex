@@ -22,8 +22,7 @@ This is the name of the container.
 The image container. By default this pulls from linuxserver.io.
 
     plex_ports:
-     - 7878:7878
-     - 8787:8787
+     32400:32400
 
 These are the exported ports of the container.
 
@@ -48,14 +47,6 @@ This is a dictionary of extra environment variables for the container.
 
     plex_docker_additional_options:
       restart_policy: unless-stopped
-
-Another dictionary, this time of additional options for the container. By default, this sets the container to start on boot unless it was previously stopped. 
-
-    plex_config:
-      ApiKey: "abc123"
-      UrlBase: "example.com"
-      LaunchBrowser: "False"
-      AnalyticsEnabled: "False"
 
 This is not currently in use - the applicable code is commented out in the task. 
 
