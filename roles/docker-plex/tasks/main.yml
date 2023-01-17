@@ -19,7 +19,7 @@
       name: "{{ plex_name }}"
       image: "{{ plex_image }}"
       state: started
-      network_mode: "{{ plex_network_mode }}"
+#      network_mode: "{{ plex_network_mode }}"
 #      published_ports: "{{ plex_ports }}"
       volumes:
         - "{{ plex_config_directory }}:/config"
